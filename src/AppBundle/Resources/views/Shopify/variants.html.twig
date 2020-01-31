@@ -1,0 +1,44 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Shopify:Products/Variants{% endblock %}
+
+{% block body %}
+    <h1>Welcome to the Shopify:Products/Variants</h1>
+    <table id="myTable" class="display">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>SKU</th>
+            <th>Barcode</th>
+            <th>Inventario</th>
+        </tr>
+        </thead>
+        <tbody>
+        {#Recorrer cada Producto#}
+        {% for product in products %}
+            {#Recorrer cada Variante que tiene el producto#}
+            {% for variant in product.variants %}
+                <tr>
+                    <td>{{ product.title }}</td>
+                    <td>{{ variant.sku }}</td>
+                    <td>{{ variant.barcode }}</td>
+                    <td>{{ variant.inventory_quantity }}</td>
+                </tr>
+            {% endfor %}
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready( function () {
+            $('#myTable').DataTable({
+                "order": [[ 0, "asc" ]],
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+                }
+            });
+        } );
+    </script>
+{% endblock %}

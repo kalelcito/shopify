@@ -1,0 +1,35 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Shopify:Products{% endblock %}
+
+{% block body %}
+<h1>Welcome to the Shopify:Products</h1>
+    <table id="myTable" class="display">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+        </tr>
+        </thead>
+        <tbody>
+        {# Mostrar el listado de Productos en una tabla#}
+        {% for product in products %}
+            <tr>
+                <td>{{ product.title }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready( function () {
+            $('#myTable').DataTable({
+                "order": [[ 0, "asc" ]],
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+                }
+            });
+        } );
+    </script>
+{% endblock %}
